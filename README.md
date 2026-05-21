@@ -1,6 +1,6 @@
-# Sistem Inventori Farmasi
+# Sistem Inventori Pengadaan
 
-Ini adalah aplikasi web sederhana untuk manajemen inventori dan penjualan, yang dibangun menggunakan PHP Native dan MySQL. Project ini dibuat untuk tujuan portofolio dan pembelajaran, khususnya dalam memahami logika CRUD, pembuatan Stored Procedure di database, dan interaksi antar tabel yang cukup kompleks.
+Ini adalah aplikasi web sederhana untuk manajemen inventori dan penjualan, yang dibangun menggunakan PHP Native dan MySQL. Project ini dibuat owner guna melkaukan pembelajaran, khususnya dalam memahami logika CRUD, pembuatan Stored Procedure di database, dan interaksi antar tabel yang cukup kompleks.
 
 ## Fitur Utama
 
