@@ -1,0 +1,20 @@
+# Laragon / XAMPP / OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment Variables (Keep local secrets safe if used)
+.env
+.env.local
+
+# Logs
+*.log

@@ -1,18 +1,14 @@
 <?php
 session_start();
-$loginError = null;
+$resetError = null;
+$resetSuccess = null;
 if (isset($_SESSION['error'])) {
-    $loginError = $_SESSION['error'];
+    $resetError = $_SESSION['error'];
     unset($_SESSION['error']);
 }
-$loginSuccess = null;
 if (isset($_SESSION['success'])) {
-    $loginSuccess = $_SESSION['success'];
+    $resetSuccess = $_SESSION['success'];
     unset($_SESSION['success']);
-}
-if (isset($_SESSION['user']['logged_in']) && $_SESSION['user']['logged_in'] === true) {
-    header("Location: dashboard.php");
-    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -20,13 +16,13 @@ if (isset($_SESSION['user']['logged_in']) && $_SESSION['user']['logged_in'] === 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Sistem Informasi Farmasi</title>
+    <title>Reset Password | Sistem Informasi Farmasi</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <!-- Google Font: Poppins (optional, lebih modern) -->
+    <!-- Google Font: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -115,11 +111,6 @@ if (isset($_SESSION['user']['logged_in']) && $_SESSION['user']['logged_in'] === 
             margin-bottom: 20px;
         }
 
-        .form-check-label {
-            color: #2e7d32;
-            font-size: 14px;
-        }
-
         .forgot-password {
             color: #2e7d32;
             font-size: 14px;
@@ -162,26 +153,25 @@ if (isset($_SESSION['user']['logged_in']) && $_SESSION['user']['logged_in'] === 
 
 <div class="login-container">
     <div class="login-card">
-        <!-- Avatar -->
         <div class="avatar">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-key"></i>
         </div>
 
-        <h2>Login</h2>
+        <h2>Reset Password</h2>
 
-        <?php if ($loginError): ?>
+        <?php if ($resetError): ?>
             <div class="alert alert-danger py-2" role="alert">
-                <?php echo htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8'); ?>
+                <?php echo htmlspecialchars($resetError, ENT_QUOTES, 'UTF-8'); ?>
             </div>
         <?php endif; ?>
 
-        <?php if ($loginSuccess): ?>
+        <?php if ($resetSuccess): ?>
             <div class="alert alert-success py-2" role="alert">
-                <?php echo htmlspecialchars($loginSuccess, ENT_QUOTES, 'UTF-8'); ?>
+                <?php echo htmlspecialchars($resetSuccess, ENT_QUOTES, 'UTF-8'); ?>
             </div>
         <?php endif; ?>
 
-        <form action="../scripts/login_post.php" method="POST">
+        <form action="../scripts/forgot_password_post.php" method="POST">
             <div class="form-group">
                 <span class="input-group-text"><i class="bi bi-person"></i></span>
                 <input type="text" name="username" class="form-control" placeholder="Username" required>
@@ -189,21 +179,22 @@ if (isset($_SESSION['user']['logged_in']) && $_SESSION['user']['logged_in'] === 
 
             <div class="form-group">
                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control" placeholder="New Password" required>
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember">
-                    <label class="form-check-label" for="remember">Remember me</label>
-                </div>
-                <a href="forgot_password.php" class="forgot-password">Forgot Password?</a>
+            <div class="form-group">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input type="password" name="password_confirm" class="form-control" placeholder="Confirm New Password" required>
             </div>
 
             <button type="submit" class="btn btn-login">
-                <i class="bi bi-box-arrow-in-right me-2"></i> LOGIN
+                <i class="bi bi-check2-circle me-2"></i> RESET PASSWORD
             </button>
         </form>
+
+        <div class="text-center mt-3">
+            <a href="login.php" class="forgot-password">Back to Login</a>
+        </div>
     </div>
 </div>
 

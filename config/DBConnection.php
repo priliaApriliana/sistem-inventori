@@ -1,6 +1,6 @@
 <?php
 class DBConnection {
-    // Konfigurasi koneksi (bisa kamu sesuaikan)
+    // Konfigurasi koneksi (Dinamis dari Vercel / Fallback ke Local)
     private string $servername = "localhost";
     private string $username   = "root";
     private string $password   = "";
@@ -9,6 +9,11 @@ class DBConnection {
     private mysqli $dbconn;
 
     public function __construct() {
+        // Ambil konfigurasi dari Environment Variables (Vercel) jika ada
+        $this->servername = getenv('DB_HOST') ?: $this->servername;
+        $this->username   = getenv('DB_USER') ?: $this->username;
+        $this->password   = getenv('DB_PASS') !== false ? getenv('DB_PASS') : $this->password;
+        $this->dbname     = getenv('DB_NAME') ?: $this->dbname;
         // buat koneksi ke MySQL
         $this->dbconn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 

@@ -27,7 +27,22 @@ class User {
         return false;
     }
 
-    // 🔹 Menampilkan semua user dan rolenya (pakai view)
+    public function updatePasswordByUsername(string $username, string $newPassword): bool {
+        $check = $this->conn->prepare("SELECT iduser FROM user WHERE username = ?");
+        $check->bind_param("s", $username);
+        $check->execute();
+        $result = $check->get_result();
+
+        if ($result->num_rows !== 1) {
+            return false;
+        }
+
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $this->conn->prepare("UPDATE user SET password = ? WHERE username = ?");
+        $stmt->bind_param("ss", $hashed, $username);
+        return $stmt->execute();
+    }
+    // List all users and roles (view)
     public function getAll(): array {
         $data = [];
         $sql = "SELECT * FROM v_user ORDER BY kode_user DESC";

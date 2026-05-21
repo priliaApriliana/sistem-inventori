@@ -1,0 +1,6 @@
+.git
+.vscode
+.env
+.DS_Store
+*.sql
+*.log

@@ -1,11 +1,26 @@
 <?php
-$current_page = basename($_SERVER['PHP_SELF']);
+$script_path = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
+$views_pos = strpos($script_path, '/views');
+if ($views_pos !== false) {
+    $base_path = substr($script_path, 0, $views_pos + 6);
+    $root_path = substr($script_path, 0, $views_pos);
+    $current_page = ltrim(substr($script_path, $views_pos + 6), '/');
+} else {
+    $base_path = '';
+    $root_path = '';
+    $current_page = ltrim($script_path, '/');
+}
+$join_path = function ($base, $path) {
+    $base = rtrim($base, '/');
+    $path = ltrim($path, '/');
+    return $base === '' ? '/' . $path : $base . '/' . $path;
+};
 $username = $_SESSION['user']['username'] ?? 'Admin';
 $role = $_SESSION['user']['role'] ?? 'Super Admin';
 ?>
 
 <!-- Bootstrap Icons -->
-<link rel="stylesheet" href="/pbd_project_copy/assets/icons/bootstrap-icons.css">
+<link rel="stylesheet" href="<?= $join_path($root_path, 'assets/icons/bootstrap-icons.css') ?>">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -246,7 +261,7 @@ $role = $_SESSION['user']['role'] ?? 'Super Admin';
     <!-- Menu -->
     <div class="sidebar-menu">
         <!-- Dashboard -->
-        <a href="/pbd_project_copy/views/dashboard.php" class="menu-item <?= $current_page === 'dashboard.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'dashboard.php') ?>" class="menu-item <?= $current_page === 'dashboard.php' ? 'active' : '' ?>">
             <i class="bi bi-speedometer2"></i>
             <span>Dashboard</span>
         </a>
@@ -256,32 +271,32 @@ $role = $_SESSION['user']['role'] ?? 'Super Admin';
         <!-- Data Master Section -->
         <div class="menu-section-title">Data Master</div>
         
-        <a href="/pbd_project_copy/views/role/list.php" class="menu-item <?= $current_page === 'role/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'role/list.php') ?>" class="menu-item <?= $current_page === 'role/list.php' ? 'active' : '' ?>">
             <i class="bi bi-person-badge"></i>
             <span>Role</span>
         </a>
         
-        <a href="/pbd_project_copy/views/user/list.php" class="menu-item <?= $current_page === 'user/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'user/list.php') ?>" class="menu-item <?= $current_page === 'user/list.php' ? 'active' : '' ?>">
             <i class="bi bi-people-fill"></i>
             <span>User</span>
         </a>
         
-        <a href="/pbd_project_copy/views/vendor/list.php" class="menu-item <?= $current_page === 'vendor/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'vendor/list.php') ?>" class="menu-item <?= $current_page === 'vendor/list.php' ? 'active' : '' ?>">
             <i class="bi bi-building-fill-add"></i>
             <span>Vendor</span>
         </a>
         
-        <a href="/pbd_project_copy/views/satuan/list.php" class="menu-item <?= $current_page === 'satuan/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'satuan/list.php') ?>" class="menu-item <?= $current_page === 'satuan/list.php' ? 'active' : '' ?>">
             <i class="bi bi-rulers"></i>
             <span>Satuan</span>
         </a>
         
-        <a href="/pbd_project_copy/views/barang/list.php" class="menu-item <?= $current_page === 'barang/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'barang/list.php') ?>" class="menu-item <?= $current_page === 'barang/list.php' ? 'active' : '' ?>">
             <i class="bi bi-box-seam-fill"></i>
             <span>Barang</span>
         </a>
         
-        <a href="/pbd_project_copy/views/margin_penjualan/list.php" class="menu-item <?= $current_page === 'margin_penjualan/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'margin_penjualan/list.php') ?>" class="menu-item <?= $current_page === 'margin_penjualan/list.php' ? 'active' : '' ?>">
             <i class="bi bi-percent"></i>
             <span>Margin Penjualan</span>
         </a>
@@ -291,27 +306,27 @@ $role = $_SESSION['user']['role'] ?? 'Super Admin';
         <!-- Transaksi Section -->
         <div class="menu-section-title">Transaksi</div>
         
-        <a href="/pbd_project_copy/views/pengadaan/list.php" class="menu-item <?= $current_page === 'pengadaan/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'pengadaan/list.php') ?>" class="menu-item <?= $current_page === 'pengadaan/list.php' ? 'active' : '' ?>">
             <i class="bi bi-cart-check-fill"></i>
             <span>Pengadaan</span>
         </a>
         
-        <a href="/pbd_project_copy/views/penerimaan/list.php" class="menu-item <?= $current_page === 'penerimaan/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'penerimaan/list.php') ?>" class="menu-item <?= $current_page === 'penerimaan/list.php' ? 'active' : '' ?>">
             <i class="bi bi-house-fill"></i>
             <span>Penerimaan</span>
         </a>
         
-        <a href="/pbd_project_copy/views/penjualan/list.php" class="menu-item <?= $current_page === 'penjualan/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'penjualan/list.php') ?>" class="menu-item <?= $current_page === 'penjualan/list.php' ? 'active' : '' ?>">
             <i class="bi bi-receipt"></i>
             <span>Penjualan</span>
         </a>
         
-        <a href="/pbd_project_copy/views/retur/list.php" class="menu-item <?= $current_page === 'retur/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'retur/list.php') ?>" class="menu-item <?= $current_page === 'retur/list.php' ? 'active' : '' ?>">
             <i class="bi bi-arrow-return-left"></i>
             <span>Retur</span>
         </a>
         
-        <a href="/pbd_project_copy/views/kartu_stok/list.php" class="menu-item <?= $current_page === 'kartu_stok/list.php' ? 'active' : '' ?>">
+        <a href="<?= $join_path($base_path, 'kartu_stok/list.php') ?>" class="menu-item <?= $current_page === 'kartu_stok/list.php' ? 'active' : '' ?>">
             <i class="bi bi-layers-fill"></i>
             <span>Kartu Stok</span>
         </a>
@@ -319,7 +334,7 @@ $role = $_SESSION['user']['role'] ?? 'Super Admin';
         <div class="menu-divider"></div>
         
         <!-- Logout -->
-        <a href="../../scripts/logout.php" class="menu-item logout" onclick="return confirm('Yakin ingin logout?')">
+        <a href="<?= $join_path($root_path, 'scripts/logout.php') ?>" class="menu-item logout" onclick="return confirm('Yakin ingin logout?')">
             <i class="bi bi-box-arrow-right"></i>
             <span>Logout</span>
         </a>

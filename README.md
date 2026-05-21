@@ -1,71 +1,35 @@
-# 💊 Sistem Informasi Inventori Farmasi
+# Sistem Inventori Farmasi
 
-![PHP](https://img.shields.io/badge/PHP-Native-777BB4?style=flat-square&logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
+Ini adalah aplikasi web sederhana untuk manajemen inventori dan penjualan, yang dibangun menggunakan PHP Native dan MySQL. Project ini dibuat untuk tujuan portofolio dan pembelajaran, khususnya dalam memahami logika CRUD, pembuatan Stored Procedure di database, dan interaksi antar tabel yang cukup kompleks.
 
-Sistem Informasi Inventori Farmasi (Apotek) adalah aplikasi manajemen stok obat, pengadaan, dan penjualan yang dibangun menggunakan PHP Native (Object-Oriented) dan MySQL. Project ini mendemonstrasikan implementasi CRUD kompleks, penggunaan Stored Procedure, Views, dan arsitektur Model-View.
+## Fitur Utama
 
-## ✨ Fitur Utama
+- **Master Data**: Kelola data barang, satuan, vendor, dan user.
+- **Transaksi**:
+  - **Pengadaan**: Membuat daftar pesanan (PO) ke vendor.
+  - **Penerimaan**: Mencatat barang masuk dari vendor dan otomatis menambah stok.
+  - **Penjualan**: Kasir untuk barang keluar dengan penghitungan subtotal otomatis.
+  - **Retur**: Mencatat barang yang dikembalikan.
+- **Laporan**: Terdapat fitur Kartu Stok untuk melacak histori keluar/masuk barang.
 
-- **📊 Dashboard Analitik:** Ringkasan total barang, user, vendor, pengadaan, penerimaan, dan pendapatan penjualan.
-- **📦 Manajemen Barang & Satuan:** Pengelolaan katalog obat/barang beserta satuan dinamis.
-- **🏢 Manajemen Vendor:** Pendataan *supplier* (vendor) untuk proses pengadaan.
-- **🛒 Transaksi Pengadaan (PO):** Pencatatan pesanan ke vendor dengan sistem perhitungan otomatis.
-- **📥 Penerimaan Barang:** Verifikasi barang masuk dari vendor berdasarkan dokumen pengadaan.
-- **💰 Transaksi Penjualan:** Modul kasir/penjualan dengan sistem margin keuntungan (HPP).
-- **🔄 Retur Barang:** Pengembalian barang yang cacat/kadaluarsa.
-- **📝 Kartu Stok:** Laporan mutasi barang (masuk/keluar) secara akurat.
-- **🔐 Autentikasi & Otorisasi:** Sistem login dengan manajemen role (Super Admin, dll).
+## Tech Stack
 
-## 🛠️ Teknologi yang Digunakan
+- **Backend**: PHP 8.x (Native OOP)
+- **Database**: MySQL (Menggunakan Views & Stored Procedures)
+- **Frontend**: HTML, CSS, Bootstrap 5
 
-*   **Backend:** PHP 8.x (Native OOP)
-*   **Database:** MySQL (Memanfaatkan Views & Stored Procedures)
-*   **Frontend:** HTML5, Vanilla CSS, Bootstrap 5, Bootstrap Icons
-*   **Arsitektur:** Native MVC-Pattern (Classes, Views, Scripts)
+## Cara Menjalankan Project (Local)
 
-## 🚀 Panduan Instalasi (Localhost)
+Project ini sangat mudah dijalankan menggunakan XAMPP atau Laragon.
 
-Aplikasi ini sangat mudah dijalankan di komputer lokal menggunakan **Laragon** atau **XAMPP**.
+1. **Import Database**
+   - Buat database baru di phpMyAdmin dengan nama `db_inventori_baru`.
+   - Import file `db_inventori_baru.sql` yang ada di dalam folder `database/` ke dalam database tersebut.
 
-### 1. Persiapan Database
-1. Buka `phpMyAdmin` atau `HeidiSQL`.
-2. Buat database baru bernama: `db_inventori_baru`
-3. Import file database yang sudah disediakan di folder:
-   `database/db_inventori_baru.sql`
-   *(Catatan: File SQL ini mengandung tabel, views, stored procedures, dan function bawaan)*
-
-### 2. Konfigurasi Aplikasi
-1. Clone / Download repository ini ke dalam folder `htdocs` (jika pakai XAMPP) atau `www` (jika pakai Laragon).
-2. Pastikan susunan foldernya seperti ini: `c:/laragon/www/pbd_project_copy/`
-3. Konfigurasi database ada di file `config/DBConnection.php`. Secara default sudah disetting menggunakan username `root` tanpa password. Silakan sesuaikan jika konfigurasi MySQL Anda berbeda.
-
-```php
-// config/DBConnection.php
-private string $servername = "localhost";
-private string $username   = "root";
-private string $password   = "";
-private string $dbname     = "db_inventori_baru";
-```
-
-### 3. Menjalankan Aplikasi
-1. Nyalakan Apache dan MySQL di XAMPP/Laragon.
-2. Buka browser dan akses: `http://localhost/pbd_project_copy/views/login.php`
-3. Gunakan akun default yang ada di database untuk login (Atau Anda bisa melihat tabel `user` untuk daftar akun).
-
-## 📂 Struktur Direktori
-
-*   `/assets` - Berisi file statis (CSS, JS, Icons).
-*   `/classes` - Berisi Class PHP (Model dan Logic untuk interaksi database).
-*   `/config` - Konfigurasi koneksi database.
-*   `/database` - File dump `.sql` untuk instalasi.
-*   `/scripts` - Script pemroses data (seperti handler login/logout).
-*   `/views` - Halaman UI (User Interface) berformat PHP.
-
-## 👨‍💻 Author
-
-Project ini dikembangkan sebagai portofolio implementasi PHP Native untuk manajemen sistem informasi kompleks.
+2. **Jalankan Aplikasi**
+   - Letakkan folder project ini di dalam folder `htdocs` (XAMPP) atau `www` (Laragon).
+   - Pastikan konfigurasi username dan password database di file `config/DBConnection.php` sudah sesuai dengan komputer Anda (defaultnya user: `root`, password kosong).
+   - Akses via browser: `http://localhost/pbd_project_copy/views/login.php`
 
 ---
-*Dibuat dengan ❤️ untuk kemajuan sistem informasi kesehatan.*
+*Silakan clone dan pelajari project ini jika dirasa bermanfaat.*
